@@ -1,0 +1,45 @@
+# @package _global_
+defaults:
+  - _self_
+
+type: simple
+model:
+  model_provider:
+    type: chat.completions
+    model: vertex.claude-sonnet-4
+  model_settings:
+    temperature: 0.3
+    top_p: 0.95
+    include_usage: true
+    extra_args:
+      timeout: 3000
+  model_params: {}
+agent:
+  name: utu-base
+  instructions: 'You are a helpful assistant.
+
+
+    You have access to procedural memory that contains guidelines from similar tasks.
+    When solving problems, carefully consider these guidelines and adapt them to the
+    current task. The memory system has learned from 0 successful task trajectories.'
+toolkits:
+  search:
+    mode: builtin
+    env_mode: local
+    name: search
+    config:
+      search_engine: google
+      search_params: {}
+      search_banned_sites: []
+      crawl_engine: jina
+      crawl_params: {}
+      crawl_jina_params: {}
+      summary_token_limit: 10000
+    config_llm:
+      model_provider:
+        type: chat.completions
+        model: vertex.claude-sonnet-4
+      model_settings: {}
+      model_params: {}
+    mcp_transport: stdio
+    mcp_client_session_timeout_seconds: 20

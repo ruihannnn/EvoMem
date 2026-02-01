@@ -9,7 +9,7 @@ data:
   dataset: "WebWalkerQA"
 
 concurrency: 128
-pass_k: 1
+pass_k: 3
 
 verify_filename: "webwalker.py"
 verify_func_name: "verify_func"

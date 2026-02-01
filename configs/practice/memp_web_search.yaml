@@ -1,0 +1,30 @@
+# @package _global_
+defaults:
+  # load the evaluation config file 
+  - /eval/web/web@evaluation
+  - _self_
+
+exp_id: "memp_web_practice"
+
+# Practice Arguments
+practice:
+  epochs: 3
+  batch_size: 50
+  grpo_n: 1  # MemP uses single trajectory per task
+  rollout_concurrency: 128
+  rollout_temperature: 0.7
+  task_timeout: 1800
+  do_eval: true
+  eval_strategy: "epoch"
+  rollout_data_truncate: 100
+  eval_data_truncate: 50
+  shuffle_data: true
+  agent_objective: |
+    input: A question or task that requires web search and information gathering
+    output: A comprehensive answer based on searched web content and reliable sources
+  learning_objective: |
+    Help the agent to improve web search strategies and information synthesis capabilities by learning from procedural memory.
+
+# Data Arguments
+data:
+  practice_dataset_name: "AFM_web_RL"

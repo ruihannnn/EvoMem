@@ -83,6 +83,8 @@ class TrainingFreeGRPO:
         self.original_temperature = practice_eval_config.agent.model.model_settings.temperature
         practice_eval_config.agent.model.model_settings.temperature = self.config.practice.rollout_temperature
         practice_eval_config.data = DataConfig(dataset=self.config.data.practice_dataset_name)
+        # Apply rollout_concurrency to concurrency for rollout manager
+        practice_eval_config.concurrency = self.config.practice.rollout_concurrency
         self.practice_rollout_manager = RolloutManager(
             config=practice_eval_config, batch_size=self.config.practice.batch_size
         )

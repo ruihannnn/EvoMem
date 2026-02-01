@@ -4,3 +4,10 @@ PROBLEM_WITH_EXPERIENCE_TEMPLATE: |
 
   When solving problems, you MUST first carefully read and understand the helpful instructions and experiences:
   {{ experiences }}
+
+PROBLEM_WITH_MEMORY_TEMPLATE: |
+  Please solve the problem:
+  {{ problem }}
+
+  When solving problems, you MUST first carefully read and understand the helpful guidelines from similar tasks:
+  {{ workflows }}

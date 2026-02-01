@@ -107,8 +107,9 @@ def parse_training_free_grpo_config() -> TrainingFreeGRPOConfig:
     )
     eval_group.add_argument("--verify_func_name", type=str, default=None, help="Name of verify function in the file")
     eval_group.add_argument("--pass_k", type=int, default=None, help="Number of pass k for evaluation")
+    eval_group.add_argument("--eval_dataset", type=str, default=None, help="Evaluation dataset name")
 
-    args = parser.parse_args()
+    args, _ = parser.parse_known_args()
 
     # Load configuration
     config = ConfigLoader.load_training_free_grpo_config(args.config_name)
@@ -149,6 +150,8 @@ def parse_training_free_grpo_config() -> TrainingFreeGRPOConfig:
         config.evaluation.verify_func_name = args.verify_func_name
     if args.pass_k is not None:
         config.evaluation.pass_k = args.pass_k
+    if args.eval_dataset is not None:
+        config.evaluation.data.dataset = args.eval_dataset
 
     # Set evaluation exp_id to the same as the overall exp_id
     if config.exp_id is not None:

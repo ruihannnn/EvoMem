@@ -6,7 +6,7 @@ type: simple
 model:
   model_provider:
     type: chat.completions
-    model: deepseek-chat  # Learned and evaluated via https://api.deepseek.com/v1 (Nov. 11, 2025)
+    model: deepseek-chat
   model_settings:
     temperature: 0.3
     top_p: 0.95
@@ -27,73 +27,143 @@ agent:
     ```.\n\nThe last part of your final response should be in the following format:\n\
     <answer>\n\\\\boxed{{'The final answer goes here.'}}\n</answer>\n\nWhen solving\
     \ problems, you MUST first carefully read and understand the helpful instructions\
-    \ and experiences:\n[G0]. Combinatorial enumeration: Systematically enumerate\
-    \ small cases using computational methods to identify patterns before theoretical\
-    \ generalization, especially for grid paths, probability problems, and constrained\
-    \ assignments.\n[G1]. Trigonometric simplification: Identify complementary angle\
-    \ pairs and apply trigonometric identities for symmetric angle patterns before\
-    \ numerical computation.\n[G2]. Geometry verification: Systematically verify all\
-    \ constraints (position, distances, angles, area) and mathematical definitions\
-    \ early using multiple independent methods (computational, geometric, pattern\
-    \ analysis), remaining flexible to reconsider assumptions when encountering contradictions,\
-    \ especially in constrained optimization.\n[G3]. Parallel lines angles: Apply\
-    \ the theorem that sum of angles on one side equals sum on the other side for\
-    \ transversals crossing parallel lines in zigzag patterns.\n[G4]. Burnside's lemma\
-    \ application: Analyze cycle structures and verify no cycles of length >1 exist\
-    \ when counting arrangements with distinct elements.\n[G5]. Divisibility sequences:\
-    \ For sequences modulo N, analyze gcd(a_i, N) chain in divisor lattice and maximize\
-    \ distinct residues by summing φ(N/d) over optimal chains, systematically verifying\
-    \ both finite sequence validity and infinite extensibility through prime factor\
-    \ analysis.\n[G6]. Result verification: Verify combinatorial results using multiple\
-    \ independent methods and thoroughly investigate discrepancies rather than dismissing\
-    \ conflicting outcomes.\n[G7]. Format verification: Verify rounding rules early\
-    \ using scientific notation or custom functions, especially for ambiguous significant\
-    \ figures between 10 and 100.\n[G8]. Code isolation: Bundle all necessary imports\
-    \ and variable definitions in each computational execution block to prevent context\
-    \ errors.\n[G9]. Method flexibility: Maintain strategic flexibility by switching\
-    \ between algebraic, geometric, and numerical approaches when one method becomes\
-    \ overly complex.\n[G10]. Pattern identification: Systematically test small cases\
-    \ to identify patterns in combinatorial optimization problems, verifying constraints\
-    \ and checking adjacency conditions before generalizing to larger scales.\n[G11].\
-    \ Constraint clarification: Clarify ambiguous constraints by testing multiple\
-    \ interpretations on small cases and checking for mathematically interesting results.\n\
-    [G12]. Symmetry exploitation: Immediately identify and exploit symmetry properties\
-    \ in geometry problems to simplify coordinate placements and reduce computational\
-    \ complexity.\n[G13]. Condition combination: Systematically combine multiple given\
-    \ conditions early to eliminate variables and constrain the problem space.\n[G14].\
-    \ Hybrid numerical-analytical: Use numerical testing on specific cases to identify\
-    \ invariant relationships and patterns before complex symbolic derivations, especially\
-    \ for parametric problems, then leverage insights to derive exact analytical expressions.\n\
-    [G15]. Bijective verification: Verify combinatorial mappings are bijective by\
-    \ testing for cases where multiple pairs yield identical outcomes, applying inclusion-exclusion\
-    \ to correct overcounting.\n[G16]. Systematic testing: Test mathematical characterizations\
-    \ on smaller, verifiable cases before scaling to target problems, using both manual\
-    \ reasoning and computational verification.\n[G17]. Transformation verification:\
-    \ When applying geometric transformations, systematically verify derived lengths\
-    \ and angles after each step and use contradictions to re-examine initial mapping\
-    \ assumptions.\n[G18]. Boundary exploration: For geometric optimization, systematically\
-    \ explore boundary cases where points become collinear, as these configurations\
-    \ often yield extremal values and provide analytical insights.\n[G19]. Complex\
-    \ root analysis: When solving equations with complex coefficients, systematically\
-    \ analyze conditions for real roots by separating into real and imaginary parts\
-    \ to address core requirements efficiently.\n[G20]. Inequality analysis: Systematically\
-    \ analyze absolute value inequalities by considering separate cases, combining\
-    \ constraints to find intersections, and carefully verifying boundary conditions.\n\
-    [G21]. Geometric sequence transformation: For nested geometric patterns, use variable\
-    \ substitution to convert complex recurrences into linear sequences, enabling\
-    \ closed-form solutions and termination analysis.\n[G22]. Constraint reduction:\
-    \ When solving constrained approximation problems, first analyze sum/integer constraints\
-    \ to reduce continuous problems to discrete combinatorial selection.\n[G23]. Min-max\
-    \ balancing: For min-max optimization with discrete assignments, calculate all\
-    \ relevant error metrics and use combinatorial reasoning to identify optimal assignments\
-    \ by balancing largest errors.\n[G24]. GCD constraint verification: For problems\
-    \ with gcd constraints, explicitly verify prime assignment chains ensuring proper\
-    \ distribution throughout sequences.\n[G25]. Constraint interpretation: When solving\
-    \ problems with coefficient constraints, explicitly test different interpretations\
-    \ and choose the one that yields mathematically consistent and unique solutions.\n\
-    [G26]. Root verification: Before applying root of unity properties, systematically\
-    \ verify the exact order by computing powers, modulus, and argument to avoid incorrect\
-    \ assumptions."
+    \ and experiences:\n[G0]. Geometric optimization: For constrained geometric optimization\
+    \ problems, exploit symmetry and apply inequality principles like AM-GM to identify\
+    \ candidate solutions before using computational tools.\n[G1]. Ambiguity handling:\
+    \ When a problem statement is ambiguous, systematically test interpretations by\
+    \ simulating small cases (e.g., n=1 to 5-7), prioritize the most constrained conditions\
+    \ first to derive relationships, and re-examine implicit constraints to identify\
+    \ the rule leading to a non-trivial answer typical of contest mathematics.\n[G2].\
+    \ Condition prioritization: When a problem specifies a special case or condition,\
+    \ analyze it directly from the outset to align the solution path with the problem's\
+    \ specific request and prevent misdirection.\n[G3]. Mathematical self-reliance:\
+    \ When computational tools are unavailable, unreliable, or repeatedly fail, immediately\
+    \ switch to self-contained analytical reasoning using fundamental mathematical\
+    \ principles—algebraic manipulation, geometric property exploitation, trigonometric\
+    \ derivation, and systematic case analysis—while preserving reasoning steps and\
+    \ focusing on universally reliable exact methods to maintain problem-solving momentum.\n\
+    [G4]. Analytical priority: When solving complex geometry problems, prioritize\
+    \ manual decomposition and algebraic translation before using computational tools,\
+    \ reserving tools for verification or intensive calculations.\n[G5]. Tool failure\
+    \ response: If computational tools fail repeatedly or are unavailable, immediately\
+    \ switch to structured analytical reasoning using at least two independent mathematical\
+    \ methods (e.g., prime factorization, combinatorial methods, trigonometric identities,\
+    \ geometric partitioning) with systematic small-case analysis for cross-verification\
+    \ and pattern detection, without further debugging attempts.\n[G6]. Periodic sequences:\
+    \ For sequence problems with periodic patterns or exclusion rules, derive closed-form\
+    \ expressions using modular arithmetic and consider natural starting points to\
+    \ resolve ambiguity before computational verification to reveal structural insights.\n\
+    [G7]. Modular counting: For combinatorial problems with modular constraints, immediately\
+    \ frame conditions in terms of allowed/disallowed residues, apply CRT to determine\
+    \ periodicity, then decompose the count into full periods via floor division and\
+    \ handle remainders by explicitly checking solution residues in the final block\
+    \ to ensure accuracy.\n[G8]. Burnside's lemma application: When counting arrangements\
+    \ under symmetry with distinct labels, verify fixed-point conditions by checking\
+    \ that all cycles in the permutation have length 1, meaning only the identity\
+    \ symmetry contributes nonzero fixed points.\n[G9]. Grid adjacency constraints:\
+    \ For combinatorial problems with adjacency constraints on grids, first model\
+    \ graph-theoretically (e.g., as independent set or matching), exploit parity/symmetry\
+    \ to derive upper bounds, then design periodic constructions to match bounds while\
+    \ explicitly verifying non-adjacency and optimality.\n[G10]. Symmetry exploitation:\
+    \ When computational tools fail for bounded integer sum problems, use symmetry\
+    \ arguments like mapping (a,b,c) to (10-a,10-b,10-c) to establish bijections between\
+    \ complementary sum ranges, simplifying counting and reducing manual computation.\n\
+    [G11]. Verification methods: Always verify combinatorial and summation results\
+    \ using at least two independent methods (e.g., direct counting and complement\
+    \ counting, or grouping with boundary analysis versus symmetry arguments) and\
+    \ perform boundary checks to detect calculation errors early, ensuring robustness\
+    \ against single-method errors.\n[G12]. Divisibility state abstraction: For optimization\
+    \ problems under divisibility constraints modulo a composite number, abstract\
+    \ the state by the set of prime factors not yet guaranteed to divide the current\
+    \ term, forming a decreasing chain by subset inclusion to maximize distinct residues.\n\
+    [G13]. Small-case verification: Always verify structural insights and combinatorial\
+    \ bounds by testing a smaller analogous case (e.g., a modulus with fewer prime\
+    \ factors) before finalizing the solution to catch overcounting and confirm optimization\
+    \ strategies.\n[G14]. Symmetric divisibility: For symmetric divisibility problems,\
+    \ first simplify algebraically to isolate a core expression, then use inequalities\
+    \ to bound variables, enumerate possible quotient values, solve resulting Diophantine\
+    \ equations case by case, and finally account for permutations to count ordered\
+    \ triples.\n[G15]. Divisibility strategy: For exponential divisibility problems,\
+    \ first test small cases to identify candidate divisors, then prove divisibility\
+    \ using modular arithmetic with the modulus suggested by problem bases, and finally\
+    \ verify maximality via prime factorization or coprimality analysis.\n[G16]. Boundary\
+    \ case analysis: For optimization problems with convexity constraints, normalize\
+    \ via scaling symmetry and systematically test boundary cases where constraints\
+    \ become tight, as extremal solutions typically occur at these boundaries.\n[G17].\
+    \ Parameter analysis: For equations with parameters affecting root properties\
+    \ (e.g., real/imaginary), substitute the property into the equation and separate\
+    \ real/imaginary parts to derive direct parameter constraints, enabling efficient\
+    \ condition analysis.\n[G18]. Expectation telescoping: For permutation problems\
+    \ involving extremal values (min/max), employ the telescoping expectation formula\
+    \ E[min] = Σ Pr(all values ≥ k) and determine value bounds early using symmetry\
+    \ and pairing arguments to reduce the counting scope.\n[G19]. Configuration verification:\
+    \ After establishing a coordinate system or geometric configuration, immediately\
+    \ perform consistency checks by verifying all given conditions (e.g., side lengths,\
+    \ bisector properties, collinearity, angle measures, vertex distinctness) through\
+    \ simple arithmetic checks before proceeding to complex algebraic manipulations.\n\
+    [G20]. Roots of unity structure: When a problem involves sums of powers of primitive\
+    \ n-th roots of unity, first check if the exponent set has algebraic structure\
+    \ (e.g., closed under negation/mod n or forms a subgroup/coset) to group terms\
+    \ analytically and reduce enumeration.\n[G21]. Dimensionality reduction: For geometric\
+    \ optimization problems with fixed distances from a point, first reduce dimensionality\
+    \ by assuming the optimal configuration lies in a plane containing the fixed point,\
+    \ justifying this reduction using monotonicity or symmetry arguments to simplify\
+    \ analysis.\n[G22]. Optimality verification: After deriving a candidate optimum\
+    \ through inequalities, explicitly construct a geometric configuration that satisfies\
+    \ all constraints to verify achievability and confirm minimality, ensuring the\
+    \ solution is not just a bound but attainable.\n[G23]. Expectation independence:\
+    \ When a problem states an expectation is independent of binary states, formalize\
+    \ as E[output|state A] = E[output|state B] and test this simplest interpretation\
+    \ first, as it often implies equal rates for time-based problems.\n[G24]. Rate\
+    \ mixture modeling: For time-based rate problems with proportional mixtures, compute\
+    \ overall rate as a weighted average using given proportions directly, and verify\
+    \ all details are incorporated in the simple model before exploring alternatives.\n\
+    [G25]. Divisibility optimization: For divisibility optimization problems with\
+    \ fixed sum constraints, derive theoretical bounds on prime exponents from the\
+    \ sum constraint, construct candidate solutions using numbers rich in relevant\
+    \ prime factors, and verify optimality by proving that exceeding the found value\
+    \ violates the derived bounds.\n[G26]. Tangent circle linearization: For problems\
+    \ involving chains of tangent circles, define sₙ = √rₙ to linearize tangency equations;\
+    \ further transformations like considering 1/sₙ or sₙ/√R often reveal arithmetic\
+    \ progressions, enabling closed-form solutions and simple feasibility checks.\n\
+    [G27]. Recurrence limit analysis: For probability problems involving limits of\
+    \ sequences defined by linear recurrences, compute the asymptotic limit analytically\
+    \ by finding the constant term in the general solution, typically of the form\
+    \ p(n) = C + Σ c_i r_i^n where |r_i| < 1, so lim p(n) = C, determined via recurrence\
+    \ systems or generating function analysis near x=1 rather than relying on numerical\
+    \ trends.\n[G28]. Signed area modeling: For geometry problems with linear combinations\
+    \ of points and area constraints, model areas as signed quantities, derive precise\
+    \ linear relationships with sign variables for orientations, and treat the problem\
+    \ as optimizing a linear expression under sign constraints.\n[G29]. Linear expression\
+    \ optimization: To maximize the absolute value of a linear expression with variable\
+    \ signs, align signs of large-magnitude terms to be the same and oppose them to\
+    \ smaller-magnitude terms, using symmetry and extremal principles to identify\
+    \ the maximum efficiently.\n[G30]. Coordinate bounds: When solving integer-coordinate\
+    \ geometry problems, immediately derive bounds from distance and geometric constraints\
+    \ to limit the search space to a manageable size for exhaustive manual enumeration,\
+    \ especially when computational tools are unreliable.\n[G31]. Capacity constraint\
+    \ enumeration: For combinatorial assignment problems with capacity constraints,\
+    \ first systematically enumerate all feasible occupancy patterns, then count each\
+    \ pattern using labeled combinatorial selections (multinomial coefficients) to\
+    \ avoid over/under-counting errors.\n[G32]. Angle configuration verification:\
+    \ For geometry problems with given angles, first map each angle to its exact geometric\
+    \ configuration, verify consistency using a sketch or mental model, and test assumptions\
+    \ against basic constraints before applying formulas to prevent misinterpretation.\n\
+    [G33]. Segment equality exploitation: In geometry problems with equal segments\
+    \ on a line (e.g., PQ=QR with collinear points), immediately explore midpoint\
+    \ or proportional relationships early in the analysis to simplify algebraic complexity\
+    \ and reveal geometric structure.\n[G34]. Grid complement bijection: For grid\
+    \ occupancy problems with row/column conditions, analyze complement sets and seek\
+    \ bijections to simpler combinatorial structures (e.g., rectangles) to simplify\
+    \ counting and prevent overcounting errors.\n[G35]. Physical verification: After\
+    \ deriving equations for a physical system, verify kinematic constraints and force\
+    \ balances through independent methods (e.g., energy conservation or dimensional\
+    \ analysis) and check physical plausibility (e.g., normal force positivity, acceleration\
+    \ direction) to catch setup errors early.\n[G36]. LCM/GCD optimization: When solving\
+    \ optimization problems involving LCM/GCD with a fixed integer, first factor the\
+    \ fixed integer to transform conditions into multiplicative inequalities, then\
+    \ systematically optimize by considering extreme values of relevant gcds to derive\
+    \ tight bounds before testing specific candidates."
 toolkits:
   python_executor:
     mode: builtin
