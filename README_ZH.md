@@ -1,3 +1,7 @@
+uv sync
+uv pip install math-verify
+
+
 # <img src="docs/assets/logo.svg" alt="Youtu-agent Logo" height="24px"> Youtu-Agent: 一个简单强大的智能体框架
 
 <div align="center">

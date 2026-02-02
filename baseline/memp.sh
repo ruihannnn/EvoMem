@@ -19,8 +19,8 @@ fi
 echo ""
 
 # ⭐ 配置并发参数
-EVAL_CONCURRENCY=256          # 评估并发
-PRACTICE_CONCURRENCY=256     # 训练并发
+EVAL_CONCURRENCY=64          # 评估并发
+PRACTICE_CONCURRENCY=64     # 训练并发
 JUDGE_CONCURRENCY=16            # 评判并发
 
 echo "==================================="
