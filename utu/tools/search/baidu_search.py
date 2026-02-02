@@ -1,4 +1,4 @@
-import aiohttp
+import httpx
 from bs4 import BeautifulSoup
 
 from ...utils import get_logger
@@ -57,10 +57,10 @@ class BaiduSearch:
             }
         """
         params = {"wd": query, "rn": "20"}
-        async with aiohttp.ClientSession() as session:
-            async with session.get(self.url, headers=self.headers, params=params) as response:
-                response.raise_for_status()  # avoid cache error!
-                results = await response.text(encoding="utf-8")
+        async with httpx.AsyncClient() as client:
+            response = await client.get(self.url, headers=self.headers, params=params)
+            response.raise_for_status()  # avoid cache error!
+            results = response.text
 
         soup = BeautifulSoup(results, "html.parser")
         results = []
