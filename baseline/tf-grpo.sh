@@ -4,7 +4,7 @@
 set -e
 
 
-cd /Users/liruihan/youtu-agent
+# cd /Users/liruihan/youtu-agent
 # 🔧 加载环境变量
 if [ -f .env ]; then
     echo "正在加载 .env 文件..."
@@ -19,9 +19,9 @@ fi
 echo ""
 
 # ⭐ 配置并发参数
-EVAL_CONCURRENCY=8          # 评估并发
-PRACTICE_CONCURRENCY=8     # 训练并发
-JUDGE_CONCURRENCY=8            # 评判并发
+EVAL_CONCURRENCY=64          # 评估并发
+PRACTICE_CONCURRENCY=64     # 训练并发
+JUDGE_CONCURRENCY=16            # 评判并发
 
 echo "==================================="
 echo "  并发配置:"

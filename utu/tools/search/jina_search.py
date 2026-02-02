@@ -1,4 +1,4 @@
-import aiohttp
+import httpx
 
 from ...utils import EnvUtils, async_file_cache, get_logger
 from ..utils import ContentFilter
@@ -58,8 +58,8 @@ class JinaSearch:
             }
         """
         params = {"q": query, **self.search_params}
-        async with aiohttp.ClientSession() as session:
-            async with session.get(self.jina_url, headers=self.jina_header, params=params) as response:
-                response.raise_for_status()
-                results = await response.json()
-                return results
+        async with httpx.AsyncClient() as client:
+            response = await client.get(self.jina_url, headers=self.jina_header, params=params)
+            response.raise_for_status()
+            results = response.json()
+            return results

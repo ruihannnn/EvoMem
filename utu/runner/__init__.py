@@ -7,19 +7,19 @@ from .react_runner import ReactRunner
 
 
 def get_runner(name: Literal["openai", "react"] = "openai") -> object:
-    """Get a runner class by name.
+    """Get a runner class or instance by name.
 
     Args:
         name: Runner name ("openai" for default, "react" for ReactRunner)
 
     Returns:
-        Runner class (not instance)
+        Runner class (for react) or instance (for openai)
     """
     # TODO: add a protocol for runner
     if name == "react":
-        return ReactRunner
+        return ReactRunner  # Return class (uses @classmethod)
     elif name == "openai":
-        return UTUAgentRunner()
+        return UTUAgentRunner()  # Return instance
     else:
         raise ValueError(f"Unknown runner name: {name}")
 

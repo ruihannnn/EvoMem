@@ -1,4 +1,4 @@
-import aiohttp
+import httpx
 
 from ...utils import EnvUtils, async_file_cache, get_logger
 
@@ -35,8 +35,8 @@ class JinaCrawl:
     @async_file_cache(expire_time=None)
     async def crawl_jina(self, url: str) -> str:
         # Get the content of the url
-        async with aiohttp.ClientSession() as session:
-            async with session.get(f"{self.jina_url}/{url}", headers=self.jina_header) as response:
-                response.raise_for_status()  # avoid cache error!
-                text = await response.text()
-                return text
+        async with httpx.AsyncClient() as client:
+            response = await client.get(f"{self.jina_url}{url}", headers=self.jina_header)
+            response.raise_for_status()  # avoid cache error!
+            text = response.text
+            return text

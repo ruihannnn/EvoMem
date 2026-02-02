@@ -1,4 +1,4 @@
-import aiohttp
+import httpx
 
 from ...utils import EnvUtils, async_file_cache, get_logger
 from ..utils import ContentFilter
@@ -43,8 +43,8 @@ class GoogleSearch:
     async def search_google(self, query: str) -> dict:
         """Call the serper.dev API and cache the results."""
         params = {"q": query, **self.search_params, "num": 10}  # fetch and cache the results
-        async with aiohttp.ClientSession() as session:
-            async with session.post(self.serper_url, headers=self.serper_header, json=params) as response:
-                response.raise_for_status()  # avoid cache error!
-                results = await response.json()
-                return results
+        async with httpx.AsyncClient() as client:
+            response = await client.post(self.serper_url, headers=self.serper_header, json=params)
+            response.raise_for_status()  # avoid cache error!
+            results = response.json()
+            return results
